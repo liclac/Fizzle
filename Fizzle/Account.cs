@@ -20,7 +20,12 @@ namespace Fizzle
 
 		public void Do(Action action)
 		{
-			Task.Factory.StartNew(() => TwitterCredentials.ExecuteOperationWithCredentials(credentials, action));
+			TwitterCredentials.ExecuteOperationWithCredentials(credentials, action);
+		}
+
+		public void DoAsync(Action action)
+		{
+			Task.Factory.StartNew(() => Do(action));
 		}
 	}
 }

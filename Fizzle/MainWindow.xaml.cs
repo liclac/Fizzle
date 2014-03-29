@@ -34,10 +34,15 @@ namespace Fizzle
 			account = new Account("1586652572-ZsDFzQbbeHVKDEtS82Y6gAg8QZ9XYnk198yg6Xx", "6lVkISwXMAi2BOSpos3klwMt1qTlCmuaZnkkGibOi2I2v");
 		}
 
-		private void SendButton_Click(object sender, RoutedEventArgs e)
+		private void PostTweet_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+		{
+			e.CanExecute = TweetText.Text.Length > 0 && TweetText.Text.Length <= 140;
+		}
+
+		private void PostTweet_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			String text = TweetText.Text;
-			account.Do(() => { Tweet.PublishTweet(text); });
+			account.DoAsync(() => { Tweet.PublishTweet(text); });
 		}
 	}
 }
