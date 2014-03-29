@@ -36,7 +36,8 @@ namespace Fizzle
 
 		private void SendButton_Click(object sender, RoutedEventArgs e)
 		{
-			account.Post(TweetText.Text);
+			String text = TweetText.Text;
+			account.Do(() => { Tweet.PublishTweet(text); });
 		}
 	}
 }

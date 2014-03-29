@@ -18,15 +18,9 @@ namespace Fizzle
 			credentials = TwitterCredentials.CreateCredentials(accessToken, accessSecret, ConfigurationManager.AppSettings["consumerKey"], ConfigurationManager.AppSettings["consumerSecret"]);
 		}
 
-		public void Post(string text)
+		public void Do(Action action)
 		{
-			Task.Factory.StartNew(() =>
-			{
-				TwitterCredentials.ExecuteOperationWithCredentials(credentials, () =>
-				{
-					Tweet.PublishTweet(text);
-				});
-			});
+			Task.Factory.StartNew(() => TwitterCredentials.ExecuteOperationWithCredentials(credentials, action));
 		}
 	}
 }
